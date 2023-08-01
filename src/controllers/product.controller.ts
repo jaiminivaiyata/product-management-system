@@ -2,16 +2,27 @@ import httpStatus from 'http-status';
 import express from 'express';
 import { ApiError } from '../utils/ApiError';
 
-import { createProductService, queryProducts, getProductById, updateProductById, deleteProductById} from "../services/product.service";
+import { Product, Iprouduct } from '../models/product.model';
+import { createProductService, createBulkProductService, queryProducts, getProductById, updateProductById, deleteProductById } from "../services/product.service";
 import { sendCommonResponse } from "../general-components/response";
 
 export const createProductController = async (request: express.Request, response: express.Response) => {
-    const product = await createProductService({...request.body});
+    const product = await createProductService({ ...request.body });
 
     const responseObject = {
         code: httpStatus.CREATED,
         data: product,
         message: "New Product created successfully!"
+    }
+    sendCommonResponse(response, httpStatus.CREATED, responseObject)
+};
+
+export const createBulkProductController = async (request: express.Request, response: express.Response) => {
+    const products: Iprouduct[] = await createBulkProductService(request.body.products);
+    const responseObject = {
+        code: httpStatus.CREATED,
+        data: products,
+        message: "New Products created successfully!"
     }
     sendCommonResponse(response, httpStatus.CREATED, responseObject)
 };
@@ -46,7 +57,7 @@ export const getProductController = async (request: express.Request, response: e
 };
 
 export const getProductsController = async (request: express.Request, response: express.Response) => {
-    const result = await queryProducts({...request.query});
+    const result = await queryProducts({ ...request.query });
     const responseObject = {
         code: httpStatus.OK,
         data: result,

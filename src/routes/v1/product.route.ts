@@ -1,8 +1,7 @@
 import express from "express";
-
-import { createProduct, getProducts, getProduct, updateProduct, deleteProduct } from "../../validations/product.validation";
+import { createProduct, createBulkProduct, getProducts, getProduct, updateProduct, deleteProduct } from "../../validations/product.validation";
 import { validate } from "../../middlewares/validate";
-import { createProductController, getProductsController, getProductController, updateProductController, deleteProductController } from "../../controllers/product.controller"
+import { createProductController, createBulkProductController, getProductsController, getProductController, updateProductController, deleteProductController } from "../../controllers/product.controller"
 import { asyncHandler } from "../../middlewares/asyncHandler";
 
 
@@ -16,5 +15,8 @@ export default (router: express.Router) => {
         .get(validate(getProduct), asyncHandler(getProductController))
         .patch(validate(updateProduct), asyncHandler(updateProductController))
         .delete(validate(deleteProduct), asyncHandler(deleteProductController));
+
+    router.route('/products')
+        .post(validate(createBulkProduct), asyncHandler(createBulkProductController))
 
 }
