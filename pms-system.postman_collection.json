@@ -66,6 +66,45 @@
 			"response": []
 		},
 		{
+			"name": "product multiple insert",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"products\": [{\r\n        \"productName\": \"new product18\",\r\n        \"productDescription\": \"second product\",  \r\n        \"price\": 10,  \r\n        \"stockQuantity\": 10,\r\n        \"category\": \"facewash\"\r\n    },\r\n    {\r\n        \"productName\": \"new product4\",\r\n        \"productDescription\": \"second product\",  \r\n        \"price\": 10,  \r\n        \"stockQuantity\": 10,\r\n        \"category\": \"facewash\"\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "poduct list",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
