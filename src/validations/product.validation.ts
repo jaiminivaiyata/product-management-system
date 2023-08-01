@@ -11,17 +11,30 @@ export const createProduct = {
   }),
 };
 
+export const createBulkProduct = {
+  body: Joi.object().keys({
+    products: Joi.array().items(Joi.object().keys({
+      productName: Joi.string().max(100).required(),
+      productDescription: Joi.string().max(500).required(),
+      price: Joi.number().required(),
+      category: Joi.string().max(50).required(),
+      stockQuantity: Joi.number().integer().required(),
+    })).min(1).required()
+  })
+};
+
+
 export const updateProduct = {
   params: Joi.object().keys({
     productId: Joi.required().custom(objectId).required(),
   }),
   body: Joi.object()
     .keys({
-        productName: Joi.string().max(100),
-        productDescription: Joi.string().max(500),
-        price: Joi.number(),
-        category: Joi.string().max(50),
-        stockQuantity: Joi.number().integer(),
+      productName: Joi.string().max(100),
+      productDescription: Joi.string().max(500),
+      price: Joi.number(),
+      category: Joi.string().max(50),
+      stockQuantity: Joi.number().integer(),
     })
     .min(1),
 };

@@ -12,6 +12,10 @@ export const createProductService = async (productBody: Iprouduct): Promise<Ipro
     return Product.create(productBody);
 };
 
+export const createBulkProductService = async (productArray: Iprouduct[]): Promise<Iprouduct[]> => {
+    return Product.insertMany(productArray);
+};
+
 
 export const queryProducts = async (filter: Record<string, any>): Promise<Iprouduct[]> => {
     return Product.find(filter)
